@@ -1,0 +1,359 @@
+.heroSection {
+  padding-top: var(--spacing-4xl);
+  padding-bottom: var(--spacing-4xl);
+  background-color: transparent;
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.heroContainer {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2xl);
+  position: relative;
+  z-index: 2;
+}
+
+
+
+.headlineBlock {
+  flex: 0 0 55%;
+  max-width: 55%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  box-sizing: border-box;
+}
+
+.cockpitBlock {
+  flex: 0 0 45%;
+  max-width: 45%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.badgeWrapper {
+  margin-bottom: var(--spacing-sm);
+}
+
+.productBadge {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-half);
+}
+
+.badgeIcon {
+  font-size: 1rem;
+}
+
+.mainTitle {
+  font-family: var(--font-display);
+  font-size: var(--size-display-1);
+  line-height: var(--line-height-display-1);
+  font-weight: 800;
+  letter-spacing: var(--letter-spacing-display-1);
+  color: var(--text-primary);
+  margin-top: 0;
+  margin-bottom: var(--spacing-sm);
+}
+
+.description {
+  font-family: var(--font-body);
+  font-size: var(--size-body-large);
+  line-height: var(--line-height-body-large);
+  color: var(--text-secondary);
+  margin-top: 0;
+  margin-bottom: var(--spacing-xl);
+  max-width: 540px;
+}
+
+.actionsGroup {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-sm);
+}
+
+.primaryBtn {
+  font-size: 1rem;
+}
+
+.secondaryBtn {
+  font-size: 1rem;
+}
+
+.frictionText {
+  font-family: var(--font-body);
+  font-size: var(--size-caption);
+  line-height: var(--line-height-caption);
+  color: var(--text-secondary);
+  opacity: 0.8;
+  margin: 0;
+}
+
+/* Glassmorphism Cockpit Card with 3D Parallax/Tilt */
+.cockpitCard {
+  background: rgba(23, 43, 54, 0.45);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid rgba(217, 232, 226, 0.15);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-md);
+  width: 100%;
+  max-width: 480px;
+  box-shadow: 
+    var(--shadow-lg), 
+    0 20px 40px rgba(23, 43, 54, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  position: relative;
+  transform-style: preserve-3d;
+  transform: translate3d(0, calc(var(--scroll-y, 0px) * 0.15px), 0) perspective(1000px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transition: transform 0.15s cubic-bezier(0.25, 1, 0.5, 1);
+  will-change: transform;
+}
+
+.cockpitHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: var(--spacing-md);
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border-muted);
+}
+
+.cockpitStatusDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--accent-primary);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 200, 1, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 6px rgba(255, 200, 1, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 200, 1, 0);
+  }
+}
+
+.cockpitTitle {
+  font-family: var(--font-restricted);
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-primary);
+}
+
+.pipelineVisual {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--spacing-md);
+  position: relative;
+  padding: 10px 0;
+  transform: translate3d(0, 0, 15px); /* Push inner content slightly forward in 3D */
+}
+
+.pipelineNode {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 0 0 20%;
+  text-align: center;
+}
+
+.nodeIconWrap {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-sm);
+  background-color: rgba(13, 61, 72, 0.6);
+  border: 1px solid var(--border-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent-primary);
+  font-size: 1.25rem;
+  margin-bottom: var(--spacing-xs);
+  box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.05);
+}
+
+.nodeLabel {
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  line-height: 1.2;
+  margin-bottom: 4px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nodeStatus {
+  font-family: var(--font-restricted);
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  background-color: rgba(217, 232, 226, 0.1);
+  padding: 2px 6px;
+  border-radius: var(--radius-xs);
+}
+
+.pipelineConnector {
+  flex: 1;
+  height: 2px;
+  position: relative;
+  top: -22px;
+  overflow: hidden;
+}
+
+.connectorLine {
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(90deg, var(--border-muted), var(--accent-primary), var(--border-muted));
+  background-size: 200% 100%;
+  animation: flow 1.5s linear infinite;
+}
+
+@keyframes flow {
+  0% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: -100% 0;
+  }
+}
+
+.cockpitMetrics {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  transform: translate3d(0, 0, 10px);
+}
+
+.metricPill {
+  flex: 1;
+  background-color: rgba(13, 61, 72, 0.5);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid var(--border-muted);
+  border-radius: var(--radius-sm);
+  padding: 6px var(--spacing-xs);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.05);
+}
+
+.metricLabel {
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  color: var(--text-secondary);
+  margin-bottom: 2px;
+}
+
+.metricValue {
+  font-family: var(--font-restricted);
+  font-size: var(--size-body-base);
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+@media (max-width: 992px) {
+  .heroSection {
+    padding-top: var(--spacing-2xl);
+    padding-bottom: var(--spacing-2xl);
+  }
+  .heroContainer {
+    flex-direction: column;
+    gap: var(--spacing-xl);
+  }
+  .headlineBlock {
+    flex: 0 0 100%;
+    max-width: 100%;
+    align-items: center;
+    text-align: center;
+  }
+  .cockpitBlock {
+    flex: 0 0 100%;
+    max-width: 100%;
+    width: 100%;
+  }
+  .description {
+    max-width: 100%;
+  }
+  .actionsGroup {
+    justify-content: center;
+  }
+  .cockpitCard {
+    max-width: 100%;
+    /* Disable 3D transforms on mobile to avoid side scrolling issues */
+    transform: none !important;
+  }
+}
+
+.heroMarqueeBelt {
+  width: 100%;
+  padding: var(--spacing-sm) 0;
+  background-color: rgba(23, 43, 54, 0.25);
+  backdrop-filter: blur(24px) saturate(220%);
+  -webkit-backdrop-filter: blur(24px) saturate(220%);
+  border-top: 1px solid rgba(217, 232, 226, 0.08);
+  border-bottom: 1px solid rgba(217, 232, 226, 0.08);
+  margin-top: var(--spacing-4xl);
+  box-sizing: border-box;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03), 0 10px 30px rgba(11, 43, 54, 0.2);
+}
+
+.marqueeItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(217, 232, 226, 0.1);
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  font-family: var(--font-restricted);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  letter-spacing: 0.03em;
+  box-shadow: 
+    0 2px 8px rgba(11, 43, 54, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  transition: 
+    border-color var(--duration-hover) var(--ease-micro),
+    background-color var(--duration-hover) var(--ease-micro),
+    box-shadow var(--duration-hover) var(--ease-micro),
+    transform var(--duration-hover) var(--ease-micro),
+    color var(--duration-hover) var(--ease-micro);
+}
+
+.marqueeItem:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: var(--glow-color, var(--accent-primary));
+  box-shadow: 
+    0 0 16px var(--glow-color, rgba(255, 200, 1, 0.25)),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+  color: var(--text-primary);
+}
+
+.marqueeIcon {
+  color: var(--glow-color, var(--accent-primary));
+  font-size: 0.95rem;
+  display: inline-flex;
+  align-items: center;
+}
+

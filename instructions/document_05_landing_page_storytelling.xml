@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<instruction document="5" title="Landing Page Storytelling &amp; Narrative Flow">
+  <overview>
+    This document defines the structural narrative flow of the landing page, 
+    mapping user psychology states (Stripe/Linear style) to content sections.
+  </overview>
+  
+  <journey>
+    <step order="1" section="Hero" question="What is this?" psychology="Capture curiosity within 3 seconds; show technical credibility.">
+      <headline>Automate data pipelines. No glue code.</headline>
+      <description>Connect, configure, and monitor automated pipelines without writing custom ETL scripts or manual schema mappings.</description>
+      <actions>Primary: "Build Free Pipeline" (Forsythia) | Secondary: "View API Docs" (Outline)</actions>
+      <friction_reducer>No credit card required. SOC2 compliant.</friction_reducer>
+      <cockpit_visualization>CSS-only pipeline showing Source Database → Schema Mapper → Validation Engine → Data Warehouse with live metric pills (Latency: 23ms, Records: 50M+, Status: ● Live).</cockpit_visualization>
+      <layout>Split layout on desktop (Left: 55% text, Right: 45% cockpit), single column stack on mobile.</layout>
+    </step>
+    
+    <step order="2" section="The Problem" question="Why do I need it?" psychology="Empathy mapping. Validate the user's ETL pain points.">
+      <headline>Still writing custom ETL scripts?</headline>
+      <pain_points>
+        <point>Manual schema mappings fail under scale.</point>
+        <point>Broken APIs require constant pipeline maintenance.</point>
+        <point>Glue code eats up platform engineering cycles.</point>
+      </pain_points>
+    </step>
+    
+    <step order="3" section="The Solution" question="How does it fix it?" psychology="Relief. Break down the platform mechanics in steps.">
+      <steps>
+        <step_item number="01" name="Connect" description="Select database sources and warehouses." />
+        <step_item number="02" name="Configure" description="Map schema attributes." />
+        <step_item number="03" name="Deploy" description="Run stateless pipelines." />
+        <step_item number="04" name="Monitor" description="Track logs and processing latency." />
+      </steps>
+    </step>
+    
+    <step order="4" section="Feature Showcase" question="What is the core engine?" psychology="Technical capability validation using micro-stories.">
+      <showcase name="Automatic Schema Alignment">CSV -> Schema Detection -> Validation -> Database Warehouse</showcase>
+      <showcase name="Stateless Data Ingestion">Realtime streams -> 0ms disk cache -> Instant writing</showcase>
+    </step>
+    
+    <step order="5" section="BentoAccordion" question="What else can it do?" psychology="Establish security, scale, and observability confidence. CSS grid on desktop (≥ 768px), accordion on mobile (&lt; 768px). State persists on resize.">
+      <capabilities>
+        <item name="Pipeline Orchestration" span="8" layout="flowchart illustration" />
+        <item name="Platform Security" span="4" layout="SOC2 details, SSO credentials" />
+        <item name="Observability Widget" span="4" layout="Uptime chart, runtime logs" />
+        <item name="Performance Metrics" span="8" layout="Sub-200ms processing, 50M records" />
+      </capabilities>
+    </step>
+    
+    <step order="6" section="Works With" question="Does it integrate with my stack?" psychology="Stack verification. Reassure developers.">
+      <connectors>Snowflake, PostgreSQL, BigQuery, AWS S3, Docker</connectors>
+    </step>
+    
+    <step order="7" section="Developer Experience" question="What is the DX?" psychology="Control and flexibility. Demonstrate API/CLI access.">
+      <content>REST API commands, SDK snippets, configuration file preview.</content>
+    </step>
+    
+    <step order="8" section="Testimonials" question="Why should I trust you?" psychology="Quantifiable proof from peers.">
+      <quote card="1">"Reduced ETL setup from 2 days to 20 minutes."</quote>
+      <quote card="2">"Auto-sync handles 50M records with zero pipeline downtime."</quote>
+    </step>
+    
+    <step order="9" section="Pricing Panel" question="What does it cost?" psychology="Clear value segments. Free vs Pro vs Enterprise.">
+      <tier name="Starter" target="Individual developers" price="$0 (Free tier)" />
+      <tier name="Pro" target="High-growth startups" price="$99/mo" highlights="Forsythia outline" />
+      <tier name="Enterprise" target="Scale operations" price="Custom" />
+    </step>
+    
+    <step order="10" section="FAQ" question="What if I have concerns?" psychology="Objection handling via structured Q&amp;A accordion panels.">
+      <header>Common questions about getting started.</header>
+      <items>Free tier details, data security/SOC2, migration support, cancellation policy, enterprise features, integration limits, uptime guarantees.</items>
+    </step>
+    
+    <step order="11" section="CTA Action Block" question="How do I start?" psychology="Frictionless entry. Clear value proposition with trust indicators.">
+      <prompt>Build your first automated workflow in under five minutes.</prompt>
+      <reduces>No credit card required. SOC2 compliant.</reduces>
+      <trust_badges>SOC2 Certified (lock), SSO Ready (shield), Audit Logs (clipboard), 99.99% Uptime (clock), 50M+ Records Synced (database)</trust_badges>
+    </step>
+    
+    <step order="12" section="Footer" question="Where is the rest?" psychology="Professional completeness and easy legal/nav directory access.">
+      <content>Links categorizing legal, product, resources, and credentials.</content>
+    </step>
+  </journey>
+</instruction>

@@ -1,0 +1,99 @@
+.card {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-muted);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-md);
+  transition: transform var(--duration-transition) var(--ease-snappy),
+              border-color var(--duration-hover) var(--ease-micro),
+              box-shadow var(--duration-hover) var(--ease-micro);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Hover glow lift on basic/default cards */
+.card:hover {
+  transform: translate3d(0, -4px, 0);
+  border-color: var(--border-active);
+  box-shadow: var(--shadow-glow);
+}
+
+/* Feature card: Standard card with a 4px left border accent in Forsythia */
+.feature {
+  border-left: 4px solid var(--accent-primary) !important;
+}
+
+/* Bento card: Elevated card with var(--radius-lg) corners and a gradient border on hover */
+.bento {
+  border-radius: var(--radius-lg);
+}
+
+.bento:hover {
+  /* Using Forsythia to Deep Saffron border styling on hover */
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 20px rgba(255, 200, 1, 0.15);
+}
+
+/* Pricing card: Premium transparent glass-neumorphism */
+.pricing {
+  border-radius: var(--radius-lg);
+  background-color: rgba(23, 43, 54, 0.25); /* Translucent glass fill */
+  backdrop-filter: blur(32px) saturate(220%);
+  -webkit-backdrop-filter: blur(32px) saturate(220%);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  /* Glass-Neumorphism shadows: soft inset top border light, soft drop shadows */
+  box-shadow: 
+    10px 10px 25px rgba(8, 22, 28, 0.7), /* Neumorphic dark shadow */
+    -10px -10px 25px rgba(255, 255, 255, 0.015), /* Neumorphic soft light glow */
+    inset 1px 1px 0px rgba(255, 255, 255, 0.15), /* Glossy top edge highlight */
+    inset -1px -1px 0px rgba(0, 0, 0, 0.2);
+}
+
+.pricing:hover {
+  transform: translate3d(0, -6px, 0);
+  border-color: rgba(255, 255, 255, 0.15);
+  box-shadow: 
+    14px 14px 30px rgba(8, 22, 28, 0.8),
+    -14px -14px 30px rgba(255, 255, 255, 0.025),
+    inset 1px 1px 0px rgba(255, 255, 255, 0.25),
+    inset -1px -1px 0px rgba(0, 0, 0, 0.2);
+}
+
+.pricing.highlighted {
+  border: 2px solid rgba(255, 200, 1, 0.45); /* Forsythia active glow */
+  box-shadow: 
+    10px 10px 25px rgba(8, 22, 28, 0.7),
+    -10px -10px 25px rgba(255, 255, 255, 0.015),
+    0 0 25px rgba(255, 200, 1, 0.25), /* Glow */
+    inset 1px 1px 0px rgba(255, 255, 255, 0.22),
+    inset -1px -1px 0px rgba(0, 0, 0, 0.2);
+}
+
+.pricing.highlighted:hover {
+  border-color: rgba(255, 200, 1, 0.65);
+  box-shadow: 
+    14px 14px 30px rgba(8, 22, 28, 0.8),
+    -14px -14px 30px rgba(255, 255, 255, 0.025),
+    0 0 35px rgba(255, 200, 1, 0.35),
+    inset 1px 1px 0px rgba(255, 255, 255, 0.3),
+    inset -1px -1px 0px rgba(0, 0, 0, 0.2);
+}
+
+/* Testimonial card: Glassmorphic card, backdrop blur, oversized quote mark */
+.testimonial {
+  background: rgba(17, 76, 90, 0.8); /* var(--bg-surface) at 80% */
+  backdrop-filter: var(--blur-md);
+  -webkit-backdrop-filter: var(--blur-md);
+}
+
+.testimonial::before {
+  content: '"';
+  position: absolute;
+  top: -10px;
+  left: 10px;
+  font-size: 8rem;
+  font-family: Georgia, serif;
+  color: var(--accent-primary);
+  opacity: 0.1;
+  line-height: 1;
+  pointer-events: none;
+}

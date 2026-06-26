@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<instruction document="12" title="Implementation Roadmap &amp; Quality Control Gateways">
+  <overview>
+    This document outlines the step-by-step build phases, quality assurance gateways, 
+    compilation checklists, and pre-launch validation tests.
+  </overview>
+  
+  <build_phases>
+    <phase number="1" name="Foundation &amp; Setup">
+      <action>Configure directory structure inside the Next.js workspace.</action>
+      <action>Preload Inter and JetBrains Mono local font files inside layout.tsx.</action>
+      <action>Define CSS tokens variables inside global styles (globals.css).</action>
+      <action>Create modular, standalone icon components from SVGs.</action>
+    </phase>
+    
+    <phase number="2" name="Primitive Elements">
+      <action>Create Section and Container layout controls.</action>
+      <action>Implement the Button element (styles: primary, secondary, link).</action>
+      <action>Build the Card primitive with hover transitions.</action>
+      <action>Implement the static Badge chip indicator.</action>
+    </phase>
+    
+    <phase number="3" name="Composite Components">
+      <action>Create composite layout cards: FAQCard and TestimonialCard.</action>
+      <action>Build navigation header templates (Navbar desktop links).</action>
+      <action>Build pricing selector cards: BillingSwitch and CurrencySelector.</action>
+      <action>Build PricingCard presentation components.</action>
+    </phase>
+    
+    <phase number="4" name="Layout Sections &amp; Page Assembly">
+      <action>Assemble static sections: Hero, Problem, Solution, FeatureShowcase, Testimonials, Footer.</action>
+      <action>Construct the grid container layouts for BentoGrid.</action>
+      <action>Establish the Client Component boundary inside PricingPanel.</action>
+      <action>Orchestrate page.tsx to pre-render the landing page framework.</action>
+    </phase>
+    
+    <phase number="5" name="Dynamic Core Integration">
+      <action>Create the memoized usePricingMatrix calculation hook.</action>
+      <action>Wire rate multipliers resolving inside ExchangeRateProvider.</action>
+      <action>Connect PricingPanel state variables to PricingCard presentation text nodes.</action>
+      <action>Integrate mobile menu toggle logic and body scroll-lock hooks.</action>
+    </phase>
+    
+    <phase number="6" name="Motion &amp; Accessibility fine-tuning">
+      <action>Define hardware-accelerated animations classes (@keyframes heroReveal).</action>
+      <action>Setup IntersectionObserver scroll reveal utilities.</action>
+      <action>Bind 3D cursor listeners inside BentoCard coordinates updates.</action>
+      <action>Setup prefers-reduced-motion media query variables overrides.</action>
+      <action>Embed JSON-LD metadata scripts inside the page header.</action>
+    </phase>
+  </build_phases>
+  
+  <qa_gateways>
+    <gateway name="Compilation Check (Post-Phase 2)">
+      <action>Run npm run build. Compilation must succeed without type or syntax errors.</action>
+      <action>Verify global design token variables are successfully loaded in layout contexts.</action>
+    </gateway>
+    <gateway name="Static Layout Stability Audit (Post-Phase 4)">
+      <action>Inspect rendering with browser JS disabled. Core content, headlines, grids, and USD prices must render correctly.</action>
+    </gateway>
+    <gateway name="State Isolation Verification (Post-Phase 5)">
+      <action>Record render cycles using React DevTools. Selector toggles must trigger exactly zero renders on sibling modules.</action>
+    </gateway>
+    <gateway name="Accessibility &amp; Focus Audit (Post-Phase 6)">
+      <action>Run axe-core checks to verify a perfect 100 accessibility rating.</action>
+      <action>Verify page traversal works using keyboard tab controls.</action>
+    </gateway>
+  </qa_gateways>
+  
+  <pre_launch_checklist>
+    <item id="1" check="Zero external UI library additions (no Framer Motion, GSAP, Lucide, Tailwind, Radix, Shadcn)." />
+    <item id="2" check="HTML raw page size under 25KB, first-load compressed JS bundle size under 100KB." />
+    <item id="3" check="Core Web Vitals scores: LCP < 1.5s, CLS < 0.01, INP < 80ms under simulated network throttling." />
+    <item id="4" check="robots.txt and sitemap.xml are indexed, JSON-LD metadata formats validated." />
+    <item id="5" check="prefers-reduced-motion triggers reset all animations and dynamic cursor coordinate checks." />
+  </pre_launch_checklist>
+</instruction>

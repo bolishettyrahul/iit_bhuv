@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<instruction document="8" title="State Isolation &amp; Render Boundaries">
+  <overview>
+    This specification outlines state scopes, render boundaries, and performance 
+    optimization patterns to keep Interaction to Next Paint (INP) under 80ms.
+  </overview>
+  
+  <state_scopes>
+    <variable name="activeCurrency" owner="PricingPanel" limits="Renders only within target pricing card elements." action="select drop click" />
+    <variable name="billingCycle" owner="PricingPanel" limits="Renders only inside pricing card cost digits text nodes." action="radio switch toggle" />
+    <variable name="isOpen" owner="NavbarDrawer" limits="Renders mobile nav modal overlays." action="hamburger tap" />
+    <variable name="activeIndex" owner="AccordionWrapper" limits="Expands selected FAQ content pane." action="header header click" />
+    <variable name="hoverCoordinates" owner="BentoCard" limits="Re-renders mouse coordinates inside active bento cell." action="mouse movement inside card boundaries" />
+  </state_scopes>
+  
+  <composition_rules>
+    <rule id="children-prop-injection">
+      Pass static server elements (RSCs) as children props to interactive client shells (RCCs). 
+      This allows React to skip re-rendering child sections when container states change.
+    </rule>
+    <rule id="stable-callbacks">
+      Event handlers passed down to dropdown inputs must use useCallback hooks to maintain reference stability.
+    </rule>
+  </composition_rules>
+  
+  <optimizations>
+    <hover_interactions>
+      <rule>Standard card hovers, button scale transformations, and border glows must use pure CSS :hover selectors.</rule>
+      <rule>GPU compositor threads handle CSS hovers without running JS threads or triggering React virtual-DOM cycles.</rule>
+      <exception>Observability 3D tilts must use local mouse event listeners restricted to the target card container.</exception>
+    </hover_interactions>
+    
+    <debounced_observers>
+      <rule>Resize observer triggers must use passive callbacks debounced to a minimum frequency of 100ms.</rule>
+      <rule>Observers must initialize on client mounts and disconnect on unmounts to prevent memory leaks.</rule>
+    </debounced_observers>
+    
+    <derived_states>
+      <rule>Avoid setting state inside useEffect hooks in response to other state changes.</rule>
+      <rule>Derive dynamic strings (annual discount rate displays, locale formatted prices) inline during render passes.</rule>
+    </derived_states>
+  </optimizations>
+  
+  <scroll_locking>
+    <rule>Opening the mobile menu drawer locks the document body scrolling.</rule>
+    <rule>Managed via a state-isolated hook that toggles overflow: hidden on the document element during mount/unmount lifecycles.</rule>
+  </scroll_locking>
+</instruction>

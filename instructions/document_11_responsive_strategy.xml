@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<instruction document="11" title="Responsive Strategy &amp; Layout Adaptations">
+  <overview>
+    This document defines the responsive breakpoints, fluid scaling rules, mobile drawer layouts, 
+    bento grid wraps, and touch target standards.
+  </overview>
+  
+  <breakpoints>
+    <breakpoint name="xxl" min_width="1440px" target="Wide desktops" container_width="1200px" padding="24px" />
+    <breakpoint name="xl" min_width="1200px" target="Standard laptops" container_width="1024px" padding="24px" />
+    <breakpoint name="lg" min_width="992px" target="Tablets landscape" container_width="960px" padding="20px" />
+    <breakpoint name="md" min_width="768px" target="Tablets portrait" container_width="720px" padding="20px" />
+    <breakpoint name="sm" min_width="576px" target="Mobiles landscape" container_width="100%" padding="16px" />
+    <breakpoint name="xs" max_width="575px" target="Mobiles portrait" container_width="100%" padding="16px" />
+  </breakpoints>
+  
+  <fluid_scaling>
+    <typography>
+      <clamp name="--size-display-1" value="clamp(2.25rem, 6vw, 4.5rem)" usage="Hero Title" />
+      <clamp name="--size-heading-1" value="clamp(1.75rem, 4vw, 3.0rem)" usage="Section Header" />
+      <clamp name="--size-heading-2" value="clamp(1.25rem, 3vw, 1.75rem)" usage="Card Header" />
+      <clamp name="--size-body-large" value="clamp(1.05rem, 2vw, 1.25rem)" usage="Intro Copy" />
+    </typography>
+    <spacing>
+      <clamp name="section-padding" value="clamp(3rem, 8vw, 6rem)" usage="Vertical margin offsets" />
+      <grid_gap desktop="24px (spacing-md)" mobile="16px (spacing-sm)" />
+    </spacing>
+  </fluid_scaling>
+  
+  <navigation>
+    <breakpoint max_width="991px" action="Convert inline navbar to mobile menu." />
+    <drawer class="navDrawer">
+      <styling>position: fixed; top: 0; right: 0; bottom: 0; width: min(320px, 85vw); background: var(--bg-surface); z-index: 1000;</styling>
+      <animation>Initially off-screen right (transform: translate3d(100%, 0, 0)). Active state translates to center (translate3d(0, 0, 0)) using var(--ease-snappy).</animation>
+      <behavior>Locks parent document scroll. Clicking backdrop dismisses drawer.</behavior>
+    </drawer>
+  </navigation>
+  
+  <grid_adjustments>
+    <bento_grid>
+      <span breakpoint="xxl_xl" cell1="span 8, row 2" cell2="span 4, row 1" cell3="span 4, row 1" cell4="span 8, row 2" />
+      <span breakpoint="lg_md" cell1="span 6, row 1" cell2="span 6, row 1" cell3="span 6, row 2" cell4="span 6, row 2" />
+      <span breakpoint="sm_xs" cell1="span 12" cell2="span 12" cell3="span 12" cell4="span 12" description="Vertical column stack." />
+    </bento_grid>
+    
+    <feature_showcase>
+      <rule>On mobile viewports (max-width: 991px), alternating row directions collapse and stack vertically.</rule>
+      <rule>Force flex-direction: column !important to ensure illustration graphics always display above the text content block.</rule>
+    </feature_showcase>
+    
+    <pricing_section>
+      <layout breakpoint="xxl_xl" type="3-column grid" value="repeat(3, 1fr)" />
+      <layout breakpoint="lg_md" type="2-column grid" value="repeat(2, 1fr) with proCard spanning 2 columns" />
+      <layout breakpoint="sm_xs" type="Horizontal swipe list" value="Touch swiping interface with paging indicator dots" />
+    </pricing_section>
+  </grid_adjustments>
+  
+  <touch_targets>
+    <rule>All buttons, select dropdowns, selectors, and accordion triggers maintain target size >= 44px x 44px.</rule>
+    <rule>Interactive links inside mobile drawer have margins/paddings spacing buffer >= 12px.</rule>
+    <rule>Active state CSS feedback (:active) darkens indicators on screen touch.</rule>
+  </touch_targets>
+</instruction>

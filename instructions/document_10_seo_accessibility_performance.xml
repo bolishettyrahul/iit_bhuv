@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<instruction document="10" title="SEO, Accessibility &amp; Performance Specification">
+  <overview>
+    This document defines index configurations, semantic guidelines, JSON-LD structures, 
+    accessibility focus management models, and Core Web Vitals optimizations.
+  </overview>
+  
+  <seo>
+    <robots_txt path="public/robots.txt">
+      <![CDATA[
+      User-agent: *
+      Allow: /
+      Disallow: /api/
+      Disallow: /_next/
+      Sitemap: https://antigravity-data.com/sitemap.xml
+      ]]>
+    </robots_txt>
+    
+    <sitemap_xml path="public/sitemap.xml">
+      <![CDATA[
+      <?xml version="1.0" encoding="UTF-8"?>
+      <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+        <url>
+          <loc>https://antigravity-data.com/</loc>
+          <lastmod>2026-06-26</lastmod>
+          <changefreq>daily</changefreq>
+          <priority>1.0</priority>
+        </url>
+      </urlset>
+      ]]>
+    </sitemap_xml>
+    
+    <semantic_html>
+      <tag name="header" role="Global branding navbar container." />
+      <tag name="nav" role="Interactive navigation landmark link list." />
+      <tag name="main" id="main-content" role="Primary document body wrapper." />
+      <tag name="section" role="Logical page sections (hero, features, pricing)." />
+      <tag name="article" role="Testimonial reviews and isolated quotes." />
+      <tag name="footer" role="Directory mappings, legal disclosures." />
+      <headings>
+        <rule>Exactly one h1 heading exists inside the Hero Section.</rule>
+        <rule>Section titles utilize h2. Card modules utilize h3. Subheadings follow strict descending hierarchy.</rule>
+      </headings>
+    </semantic_html>
+    
+    <json_ld>
+      <script_head type="application/ld+json">
+        <![CDATA[
+        {
+          "@context": "https://schema.org",
+          "@type": "SoftwareApplication",
+          "name": "Antigravity Data Automation",
+          "description": "Premium automated data pipeline engine. Connect databases, configure schemas, and deploy serverless pipelines without writing glue code.",
+          "applicationCategory": "BusinessApplication",
+          "operatingSystem": "Web",
+          "offers": {
+            "@type": "AggregateOffer",
+            "priceCurrency": "USD",
+            "lowPrice": "0",
+            "highPrice": "99",
+            "offerCount": "3"
+          }
+        }
+        ]
+      </script_head>
+    </json_ld>
+  </seo>
+  
+  <accessibility>
+    <skip_to_content>
+      <anchor href="#main-content" class="skipLink" text="Skip to content" />
+      <styling>Position off-screen (top: -100px) until focused via Tab (top: 16px). Styled with Forsythia fill.</styling>
+    </skip_to_content>
+    
+    <focus_management>
+      <ring>*:focus-visible matches 2px outline-color Forsythia, offset 2px.</ring>
+      <isolation>Outline indicator renders only on keyboard tabs, not mouse clicks.</isolation>
+      <trapping>Mobile menu drawer intercepts Tab focus. Captures keyboard focus inside modal and returns focus to menu button on close.</trapping>
+    </focus_management>
+    
+    <aria_matrix>
+      <element name="MobileMenuToggle" attribute="aria-expanded" values="true | false" />
+      <element name="MobileMenuToggle" attribute="aria-controls" value="mobile-navigation" />
+      <element name="MobileMenuDrawer" role="dialog" attribute="aria-modal" value="true" />
+      <element name="CurrencySelectorButton" attribute="aria-haspopup" value="listbox" />
+      <element name="CurrencySelectorList" role="listbox" />
+      <element name="PricingCardPrice" attribute="aria-live" value="polite" />
+      <element name="FAQAccordionHeader" attribute="aria-expanded" values="true | false" />
+      <element name="FAQAccordionPanel" role="region" />
+    </aria_matrix>
+  </accessibility>
+  
+  <performance>
+    <assets>
+      <images>Inline SVG icons directly. Raster images compress to WebP/AVIF, use explicit heights/widths to prevent CLS layout shifts, and lazy load below the fold.</images>
+      <fonts>Load local woff2 files. Add font-display: swap to prevent FOIT text delays.</fonts>
+    </assets>
+    <hydration>
+      <rule>Keep static structural grids as 100% Server Components (RSC) to ship 0 bytes of JS for layouts.</rule>
+      <rule>Wrap interactive dynamic controls inside small Client Component (RCC) leaf nodes.</rule>
+    </hydration>
+    <budgets FCP="0.8s" LCP="1.5s" CLS="0.01" INP="80ms" hydration="150ms" />
+  </performance>
+</instruction>

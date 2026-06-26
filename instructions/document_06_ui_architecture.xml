@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<instruction document="6" title="UI Architecture Specification">
+  <overview>
+    This document dictates the structural classification of UI components, composition patterns, 
+    data streams, and component configurations.
+  </overview>
+  
+  <classification>
+    <level name="Primitives" description="Essential single style components. Never import other components." list="Button, Card, Badge, Icon, Container, Section" />
+    <level name="Composites" description="Assembled from primitives. Control sub-layouts but not navigation." list="FAQCard, TestimonialCard, PricingCard, CurrencySelector, BillingSwitch" />
+    <level name="Sections" description="Major viewport layouts. Sibling sections never communicate." list="Navbar, Hero, Problem, Solution, FeatureShowcase, BentoAccordion, Testimonials, PricingPanel, FAQ, Footer" />
+  </classification>
+  
+  <composition_rules>
+    <rule>Downwards-only importing: Page -> Section -> Composite -> Primitive.</rule>
+    <rule>No circular imports.</rule>
+    <rule>Zero sibling cross-imports.</rule>
+  </composition_rules>
+  
+  <ui_responsibility_matrix>
+    <component name="Button" state="No" layout="No" data="No" animation="CSS hover" />
+    <component name="Card" state="No" layout="Yes" data="No" animation="CSS hover scale" />
+    <component name="NavbarDrawer" state="Yes (open)" layout="Yes" data="No" animation="CSS slide-in" />
+    <component name="PricingPanel" state="Yes (selectors)" layout="Yes" data="Yes" animation="CSS digits fade" />
+    <component name="BentoAccordion" state="Yes (activeIndex)" layout="Yes" data="Yes" animation="CSS grid on desktop, max-height accordion on mobile" />
+    <component name="BentoCard" state="No" layout="Yes" data="Yes" animation="3D mouse rotation and border glow" />
+    <component name="FAQCard" state="Yes (expand)" layout="Yes" data="Yes" animation="CSS custom max-height" />
+  </ui_responsibility_matrix>
+  
+  <specifications>
+    <primitive name="Button">
+      <inputs>style (primary, secondary, link), status (enabled, disabled), SVG icon</inputs>
+      <a11y>Contrast >= 4.5:1. Touch target >= 44px.</a11y>
+      <performance>CSS-bound. No JS state compile on styling.</performance>
+    </primitive>
+    
+    <composite name="FAQCard">
+      <inputs>title, content, isOpen</inputs>
+      <a11y>Uses details/summary native elements for progressive enhancement.</a11y>
+      <animation>Decelerating accordion height transitions.</animation>
+    </composite>
+    
+    <section name="PricingPanel">
+      <inputs>pricingConfig matrix</inputs>
+      <states>activeCurrency, billingCycle</states>
+      <a11y>polite aria-live announcements for screen readers on selection changes.</a11y>
+      <performance>State boundary; isolates pricing calculations to prevent layout re-renders.</performance>
+    </section>
+  </specifications>
+</instruction>

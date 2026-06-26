@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<instruction document="3" title="Technical Architecture Plan &amp; Framework Guidelines">
+  <overview>
+    This configuration document outlines the core architecture boundaries, framework selections, 
+    hydration paths, and asset preloading rules.
+  </overview>
+  
+  <principles>
+    <rule id="1">Server First: Default to React Server Components (RSC) to minimize client-side bundle size.</rule>
+    <rule id="2">Isolate Interactivity: Wrap interactive targets in small Client Component (RCC) leaf boundaries.</rule>
+    <rule id="3">Configuration Driven: Manage prices, currencies, animations, and metadata inside central config files.</rule>
+    <rule id="4">Zero Sibling Imports: Sections cannot import elements from sibling components.</rule>
+    <rule id="5">Zero-Runtime Animations: Use pure CSS variables and hardware-accelerated animations instead of JS engines.</rule>
+  </principles>
+  
+  <architectural_decisions>
+    <adr id="ADR-001" decision="Next.js App Router + React Server Components">
+      <alternatives>Vanilla JS, Vite Single Page App</alternatives>
+      <rationale>Enables SSR/SSG for instant SEO crawling and LCP speeds, with partial hydration for interactive leaf elements.</rationale>
+    </adr>
+    <adr id="ADR-002" decision="Custom CSS Modules + Global CSS variables">
+      <alternatives>Tailwind CSS, Styled Components</alternatives>
+      <rationale>Ensures zero-runtime styling, clean HTML without utility bloat, and granular token integrations.</rationale>
+    </adr>
+  </architectural_decisions>
+  
+  <component_hierarchy>
+    <root path="src/app/layout.tsx" render="RSC" preloads="fonts, global variables" />
+    <orchestrator path="src/app/page.tsx" render="RSC" composes="sections">
+      <section name="Navbar" render="RSC">
+        <leaf name="NavbarDrawer" render="RCC" purpose="mobile slide menu" />
+      </section>
+      <section name="Hero" render="RSC" />
+      <section name="LogoCloud" render="RSC" />
+      <section name="FeatureShowcase" render="RSC" />
+      <section name="BentoAccordion" render="RSC/RCC">
+        <leaf name="BentoCard" render="RSC" />
+        <leaf name="BentoCard" render="RCC" purpose="activeIndex border glow and details accordion" />
+      </section>
+      <section name="PricingPanel" render="RCC" state_owner="true">
+        <leaf name="BillingSwitch" render="RCC" />
+        <leaf name="CurrencySelector" render="RCC" />
+        <leaf name="PricingCard" render="RCC" />
+      </section>
+      <section name="Testimonials" render="RSC" />
+      <section name="FAQ" render="RCC">
+        <leaf name="FAQCard" render="RCC" purpose="expandable Q&amp;A panel" />
+      </section>
+      <section name="Footer" render="RSC" />
+    </orchestrator>
+  </component_hierarchy>
+  
+  <asset_handling>
+    <fonts>Load local font assets using next/font/local. Set font-display: swap to prevent blank text.</fonts>
+    <vectors>Convert SVGs into modular components. Avoid unified switch-case systems to enable bundler tree-shaking.</vectors>
+  </asset_handling>
+  
+  <error_handling_boundaries>
+    <boundary type="loading.tsx" action="Displays segment skeletons to reduce perceived load time." LCP_max="1.2s" />
+    <boundary type="error.tsx" action="Catches runtime errors using React Error Boundaries without breaking the global layout." />
+    <boundary type="not-found.tsx" action="Custom 404 page styled with global design system tokens." />
+  </error_handling_boundaries>
+</instruction>

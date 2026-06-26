@@ -1,0 +1,138 @@
+.header {
+  position: fixed;
+  top: var(--spacing-xs);
+  left: 50%;
+  transform: translate3d(-50%, 0, 0);
+  width: calc(100% - var(--spacing-md) * 2);
+  max-width: var(--container-width-max);
+  z-index: 100;
+  background-color: rgba(23, 43, 54, 0.35); /* Translucent glass */
+  backdrop-filter: blur(24px) saturate(220%);
+  -webkit-backdrop-filter: blur(24px) saturate(220%);
+  border: 1px solid rgba(217, 232, 226, 0.08);
+  border-radius: var(--radius-full);
+  height: 48px;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 0 var(--spacing-md);
+  box-shadow: 
+    var(--shadow-lg), 
+    0 16px 36px rgba(17, 43, 54, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  transition: 
+    background-color var(--duration-transition) var(--ease-smooth),
+    box-shadow var(--duration-transition) var(--ease-smooth),
+    top var(--duration-transition) var(--ease-smooth);
+}
+
+.navContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.logoWrap {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  text-decoration: none;
+  color: var(--text-primary);
+  padding: var(--spacing-half) var(--spacing-xs);
+  border-radius: var(--radius-full);
+  transition: opacity var(--duration-hover) var(--ease-micro);
+}
+
+.logoWrap:hover {
+  opacity: 0.85;
+}
+
+.logoIcon {
+  color: var(--accent-primary);
+  font-size: 1.2rem;
+}
+
+.logoText {
+  font-family: var(--font-restricted);
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.desktopNav {
+  display: flex;
+  align-items: center;
+}
+
+.navList {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navLink {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 5px 12px;
+  border-radius: var(--radius-full);
+  transition: 
+    color var(--duration-hover) var(--ease-micro),
+    background-color var(--duration-hover) var(--ease-micro);
+}
+
+.navLink:hover {
+  color: var(--text-primary);
+  background-color: rgba(217, 232, 226, 0.08); /* Frosted bubble pill hover */
+}
+
+.actionWrap {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+.navCTA {
+  display: inline-flex;
+  align-items: center;
+  background-color: var(--accent-primary);
+  color: var(--color-oceanic-noir);
+  padding: 5px 14px;
+  border-radius: var(--radius-full);
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.8rem;
+  text-decoration: none;
+  box-shadow: var(--shadow-sm);
+  transition: 
+    background-color var(--duration-hover) var(--ease-micro),
+    transform var(--duration-hover) var(--ease-micro),
+    box-shadow var(--duration-hover) var(--ease-micro);
+}
+
+.navCTA:hover {
+  background-color: var(--accent-secondary);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+@media (max-width: 992px) {
+  .header {
+    height: 56px;
+    padding: 0 var(--spacing-md);
+    top: var(--spacing-xs);
+    width: calc(100% - var(--spacing-xs) * 2);
+  }
+  .desktopNav {
+    display: none;
+  }
+  .navCTA {
+    display: none;
+  }
+}

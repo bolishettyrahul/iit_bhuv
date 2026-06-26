@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<instruction document="9" title="Motion System &amp; Animation Choreography">
+  <overview>
+    This document defines the custom easing tokens, entry staggering, 
+    scroll reveal observers, interactive animations, and accessibility overrides.
+  </overview>
+  
+  <constraints>
+    <rule>Compositor-only animations: Limit transitions to GPU-accelerated layers (transform, opacity, filter).</rule>
+    <rule>Banned properties: Never animate height/width (except via custom variables), top/left, margins, padding, border-width.</rule>
+    <rule>No external animation libraries. Use CSS Modules and inline custom delay variables.</rule>
+    <timing_budgets entry_ms="500" transition_ms="300" hover_ms="150" />
+  </constraints>
+  
+  <easing_tokens>
+    <token name="--ease-snappy" value="cubic-bezier(0.19, 1, 0.22, 1)" description="Snappy industrial entrance curves." />
+    <token name="--ease-smooth" value="cubic-bezier(0.4, 0, 0.2, 1)" description="Fluid transitions for fades." />
+    <token name="--ease-micro" value="cubic-bezier(0.16, 1, 0.3, 1)" description="Fast feedback responses for hovers." />
+    <token name="--ease-accordion" value="cubic-bezier(0.25, 1, 0.5, 1)" description="Custom decelerating curve for accordion height." />
+  </easing_tokens>
+  
+  <animations>
+    <page_entry>
+      <keyframes name="heroReveal">
+        <frame percent="0" opacity="0" transform="translate3d(0, 30px, 0)" />
+        <frame percent="100" opacity="1" transform="translate3d(0, 0, 0)" />
+      </keyframes>
+      <sequence>
+        <item name="heroTitle" delay="0ms" duration="500ms" curve="var(--ease-snappy)" />
+        <item name="heroText" delay="100ms" duration="500ms" curve="var(--ease-snappy)" />
+        <item name="heroActions" delay="200ms" duration="500ms" curve="var(--ease-snappy)" />
+        <item name="heroGraphic" delay="350ms" duration="500ms" curve="var(--ease-snappy)" />
+      </sequence>
+    </page_entry>
+    
+    <scroll_reveal>
+      <observer threshold="0.15" class="revealSection" active_class="inView" />
+      <grid_staggering>
+        <card selector=".card" base_delay="0ms" increment="75ms" transform="translate3d(0, 30px, 0) to translate3d(0, 0, 0)" />
+      </grid_staggering>
+    </scroll_reveal>
+    
+    <micro_interactions>
+      <button type="primary" hover="scale3d(1.02, 1.02, 1), background transitions to Deep Saffron, chevron icon translates 3px right" />
+      <card hover="translate3d(0, -4px, 0), border changes to Mystic Mint, shadow-glow applied" />
+      <bento_tilt rotate_clamp="-10deg to 10deg" transform="perspective(1000px) rotateX(var(--rx)) rotateY(var(--ry))" request_frame="true" />
+      <accordion expand="max-height transitions to scrollHeight using var(--ease-accordion), opacity transitions to 1" />
+    </micro_interactions>
+    
+    <pricing_transition>
+      <sequence>
+        <step order="1" class="priceExiting" opacity="0" transform="translate3d(0, -10px, 0)" duration="150ms" />
+        <step order="2" transition="update text node, currency swap" />
+        <step order="3" class="priceEntering" initial_opacity="0" initial_transform="translate3d(0, 10px, 0)" active_opacity="1" active_transform="translate3d(0, 0, 0)" duration="150ms" />
+      </sequence>
+    </pricing_transition>
+  </animations>
+  
+  <accessibility>
+    <media_query name="@media (prefers-reduced-motion: reduce)">
+      <reset selectors="*, ::before, ::after">
+        <property name="animation-delay" value="-1ms !important" />
+        <property name="animation-duration" value="1ms !important" />
+        <property name="scroll-behavior" value="auto !important" />
+        <property name="transition-duration" value="0ms !important" />
+        <property name="transform" value="none !important" />
+      </reset>
+    </media_query>
+    <js_hook name="usePrefersReducedMotion">
+      <action>Checks window.matchMedia('(prefers-reduced-motion: reduce)'). Matches update active tilt and counting state exclusions.</action>
+    </js_hook>
+  </accessibility>
+</instruction>

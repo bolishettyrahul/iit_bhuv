@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<instruction document="4" title="Design System &amp; CSS Token Configuration">
+  <overview>
+    This document defines the token values and style rules implemented in the global stylesheet.
+    All properties are bound to CSS Custom Variables.
+  </overview>
+  
+  <variables>
+    <colors>
+      <variable name="--color-oceanic-noir" value="#172B36" />
+      <variable name="--color-nocturnal-expedition" value="#114C5A" />
+      <variable name="--color-mystic-mint" value="#D9E8E2" />
+      <variable name="--color-arctic-powder" value="#F1F6F4" />
+      <variable name="--color-forsythia" value="#FFC801" />
+      <variable name="--color-deep-saffron" value="#FF9932" />
+      <variable name="--bg-canvas" value="var(--color-oceanic-noir)" />
+      <variable name="--bg-surface" value="var(--color-nocturnal-expedition)" />
+      <variable name="--text-primary" value="var(--color-arctic-powder)" />
+      <variable name="--text-secondary" value="var(--color-mystic-mint)" />
+      <variable name="--accent-primary" value="var(--color-forsythia)" />
+      <variable name="--accent-secondary" value="var(--color-deep-saffron)" />
+      <variable name="--border-muted" value="rgba(217, 232, 226, 0.15)" />
+      <variable name="--border-active" value="var(--color-mystic-mint)" />
+    </colors>
+    
+    <colors_semantic_state>
+      <variable name="--color-error" value="#EF4444" />
+      <variable name="--color-success" value="#22C55E" />
+      <variable name="--color-warning" value="#F59E0B" />
+      <variable name="--border-focus" value="var(--accent-primary)" />
+      <variable name="--border-error" value="var(--color-error)" />
+      <variable name="--bg-surface-raised" value="#1A5968" />
+      <variable name="--bg-surface-sunken" value="#0D3D48" />
+    </colors_semantic_state>
+    
+    <spacing_scale>
+      <variable name="--spacing-xs" value="8px" />
+      <variable name="--spacing-sm" value="16px" />
+      <variable name="--spacing-md" value="24px" />
+      <variable name="--spacing-lg" value="32px" />
+      <variable name="--spacing-xl" value="48px" />
+      <variable name="--spacing-2xl" value="64px" />
+      <variable name="--spacing-3xl" value="80px" />
+      <variable name="--spacing-4xl" value="96px" />
+      <variable name="--spacing-half" value="4px" comment="Half-step exception for tight padding contexts" />
+    </spacing_scale>
+    
+    <border_radii>
+      <variable name="--radius-xs" value="4px" />
+      <variable name="--radius-sm" value="8px" />
+      <variable name="--radius-md" value="12px" />
+      <variable name="--radius-lg" value="16px" />
+      <variable name="--radius-xl" value="24px" />
+      <variable name="--radius-full" value="9999px" />
+    </border_radii>
+    
+    <shadows>
+      <variable name="--shadow-sm" value="0 1px 2px 0 rgba(23, 43, 54, 0.05)" />
+      <variable name="--shadow-md" value="0 4px 6px -1px rgba(23, 43, 54, 0.1), 0 2px 4px -1px rgba(23, 43, 54, 0.06)" />
+      <variable name="--shadow-lg" value="0 10px 15px -3px rgba(23, 43, 54, 0.1), 0 4px 6px -2px rgba(23, 43, 54, 0.05)" />
+      <variable name="--shadow-glow" value="0 0 0 1px rgba(217, 232, 226, 0.15), 0 4px 20px 0 rgba(17, 76, 90, 0.4)" />
+    </shadows>
+    
+    <timings>
+      <variable name="--ease-snappy" value="cubic-bezier(0.19, 1, 0.22, 1)" />
+      <variable name="--ease-smooth" value="cubic-bezier(0.4, 0, 0.2, 1)" />
+      <variable name="--ease-micro" value="cubic-bezier(0.16, 1, 0.3, 1)" />
+      <variable name="--duration-hover" value="150ms" />
+      <variable name="--duration-transition" value="300ms" />
+      <variable name="--duration-entry" value="500ms" />
+    </timings>
+  </variables>
+  
+  <component_specifications>
+    <component name="Button">
+      <rules>
+        <rule>Minimum touch target dimensions: 44px x 44px.</rule>
+        <rule>Primary style: Forsythia background, Oceanic Noir text. On hover, translate -1px Y and swap fill to Deep Saffron.</rule>
+        <rule>Outline style: Transparent background, 1px Mystic Mint border, Arctic Powder text. On hover, apply rgba(217,232,226,0.08) fill.</rule>
+        <rule>Focus state: 2px outline solid var(--accent-primary) (Forsythia) visible on keyboard tab (outline-offset: 2px). Forsythia is the universal focus ring color.</rule>
+      </rules>
+    </component>
+    
+    <component name="Card">
+      <rules>
+        <rule>Base style: Nocturnal Expedition fill, 1px border-muted, radius-md.</rule>
+        <rule>Hover state: Translate Y -4px (GPU accelerated), border-color transitions to border-active, shadow-glow applied.</rule>
+        <rule>Feature Card Variant: Standard card with a 4px left border accent in Forsythia (--accent-primary).</rule>
+        <rule>Bento Card Variant: Elevated card with --radius-lg corners and a gradient border on hover transitioning from Forsythia to Deep Saffron at 15% opacity.</rule>
+        <rule>Pricing Card Variant: Premium card with --shadow-lg and --radius-lg. Recommended Pro plan receives a full --accent-primary border and a "Recommended" badge.</rule>
+        <rule>Testimonial Card Variant: Glassmorphic card with --bg-surface at 80% opacity, backdrop-filter: var(--blur-md), and a decorative oversized quote mark (") in Forsythia at 10% opacity positioned top-left.</rule>
+      </rules>
+    </component>
+    
+    <component name="Inputs">
+      <rules>
+        <rule>Interactive inputs (selectors, switches) feature a focus-within outline of 3px rgba(255,200,1,0.15).</rule>
+        <rule>Focus borders transition to Forsythia gold on active focus.</rule>
+      </rules>
+    </component>
+  </component_specifications>
+</instruction>

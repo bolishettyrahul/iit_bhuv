@@ -1,0 +1,78 @@
+.notFoundWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  width: 100%;
+  background-color: var(--bg-canvas);
+  background-image: 
+    radial-gradient(circle at 10% 20%, rgba(26, 89, 104, 0.15) 0%, transparent 40%),
+    radial-gradient(circle at 90% 80%, rgba(26, 89, 104, 0.15) 0%, transparent 40%);
+  color: var(--text-primary);
+  padding: var(--spacing-xl) var(--spacing-md);
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: var(--size-heading-1);
+  font-weight: 800;
+  line-height: var(--line-height-heading-1);
+  letter-spacing: var(--letter-spacing-heading-1);
+  color: var(--text-primary);
+  margin-top: 0;
+  margin-bottom: var(--spacing-sm);
+  background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-primary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  max-width: 800px;
+}
+
+.text {
+  font-family: var(--font-body);
+  font-size: var(--size-body-large);
+  line-height: var(--line-height-body-large);
+  color: var(--text-secondary);
+  max-width: 600px;
+  margin-top: 0;
+  margin-bottom: var(--spacing-lg);
+}
+
+.homeLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--accent-primary);
+  color: var(--color-oceanic-noir);
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: var(--size-ui-label);
+  text-decoration: none;
+  padding: 12px 28px;
+  border-radius: var(--radius-sm);
+  border: none;
+  cursor: pointer;
+  min-height: 44px;
+  box-shadow: var(--shadow-md);
+  transition: 
+    background-color var(--duration-hover) var(--ease-micro),
+    transform var(--duration-hover) var(--ease-micro),
+    box-shadow var(--duration-hover) var(--ease-micro);
+}
+
+.homeLink:hover {
+  background-color: var(--accent-secondary);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-lg), 0 0 16px rgba(255, 200, 1, 0.2);
+}
+
+.homeLink:active {
+  transform: translateY(0);
+}
+
+.homeLink:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
+}

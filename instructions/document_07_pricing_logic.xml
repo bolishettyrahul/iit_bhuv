@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<instruction document="7" title="Pricing Logic &amp; Financial Engine Architecture">
+  <overview>
+    This document defines the pricing compilation pipeline, precision guidelines, 
+    decoupled providers, locale formatting, and caching policies.
+  </overview>
+  
+  <precision_rules>
+    <rule>No binary floats for calculations (avoids display drift, e.g., 0.1 + 0.2 === 0.30000000000000004).</rule>
+    <rule>All price math operations must be performed using integer minor units (Cents/Paise).</rule>
+    <rule>Division back to major currency units (Dollars/Euros/Rupees) occurs strictly in the formatting layer.</rule>
+  </precision_rules>
+  
+  <strategy_patterns>
+    <billing_strategy>
+      <monthly multiplier="1.0" />
+      <annual multiplier="0.8" discount_percent="20" billed_annually="true" />
+    </billing_strategy>
+    
+    <regional_multiplier_strategy>
+      <currency code="USD" symbol="$" multiplier="1.0" locale="en-US" />
+      <currency code="EUR" symbol="€" multiplier="0.9" locale="de-DE" />
+      <currency code="INR" symbol="₹" multiplier="0.6" locale="en-IN" />
+      <notes>Regional multipliers represent PPP adjustments and are configurable inside pricing.config.ts.</notes>
+    </regional_multiplier_strategy>
+    
+    <formatter_strategy>
+      <rules>Decouple display currency preferences from browser locale contexts.</rules>
+      <example>An Indian developer (locale en-IN) viewing the page can select USD currency. Display formats as $29.00 but respects local spacing punctuation.</example>
+    </formatter_strategy>
+  </strategy_patterns>
+  
+  <exchange_rate_provider>
+    <interface_declaration>
+      <![CDATA[
+      export interface ExchangeRateProvider {
+        getRate(targetCurrency: string): Promise<number> | number;
+      }
+      ]]>
+    </interface_declaration>
+    <implementations>
+      <production>Fetches live rates from an external financial API.</production>
+      <hackathon_static>Resolves fixed rates matching pricing.config.ts defaults.</hackathon_static>
+      <fallback>If rate resolutions fail or return <= 0, fall back to multiplier 1.0 (USD).</fallback>
+    </implementations>
+  </exchange_rate_provider>
+  
+  <caching_and_validation>
+    <validation>Engine validates active currency codes against a whitelist ('USD', 'INR', 'EUR'). Invalid inputs reject to USD.</validation>
+    <clamping>Rate multipliers are clamped to a minimum factor of 0.1 to prevent divide-by-zero errors.</clamping>
+    <memoization>Calculated prices are memoized using cacheKey: [tierId, currencyCode, billingCycle].join('-'). Cache clears on state toggles.</memoization>
+  </caching_and_validation>
+</instruction>

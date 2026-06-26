@@ -1,0 +1,228 @@
+.section {
+  padding-top: var(--spacing-3xl);
+  padding-bottom: var(--spacing-3xl);
+  background-color: transparent;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2xl);
+}
+
+.textBlock {
+  flex: 0 0 55%;
+  max-width: 55%;
+  box-sizing: border-box;
+}
+
+.visualBlock {
+  flex: 0 0 45%;
+  max-width: 45%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.badgeWrapper {
+  margin-bottom: var(--spacing-sm);
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: var(--size-heading-1);
+  line-height: var(--line-height-heading-1);
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-top: 0;
+  margin-bottom: var(--spacing-sm);
+}
+
+.description {
+  font-family: var(--font-body);
+  font-size: var(--size-body-large);
+  line-height: var(--line-height-body-large);
+  color: var(--text-secondary);
+  margin-top: 0;
+  margin-bottom: var(--spacing-lg);
+}
+
+.painList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.painItem {
+  display: flex;
+  gap: var(--spacing-sm);
+  align-items: flex-start;
+}
+
+.painIcon {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: rgba(239, 68, 68, 0.1);
+  border: 1px solid var(--color-error);
+  color: var(--color-error);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.painContent {
+  display: flex;
+  flex-direction: column;
+}
+
+.painTitle {
+  font-family: var(--font-body);
+  font-size: var(--size-body-base);
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0 0 4px 0;
+}
+
+.painDesc {
+  font-family: var(--font-body);
+  font-size: var(--size-body-small);
+  line-height: var(--line-height-body-small);
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+/* Broken Ingestion Visual */
+.failingCard {
+  background-color: var(--bg-surface-sunken);
+  border: 1px solid var(--color-error);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-md);
+  width: 100%;
+  max-width: 400px;
+  box-shadow: var(--shadow-lg);
+  box-sizing: border-box;
+}
+
+.cardHeader {
+  margin-bottom: var(--spacing-md);
+  display: flex;
+}
+
+.statusBadge {
+  font-family: var(--font-restricted);
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--color-error);
+  letter-spacing: 0.05em;
+}
+
+.visualFlow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--spacing-md);
+  padding: 10px 0;
+}
+
+.node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80px;
+}
+
+.nodeIcon {
+  font-size: 2rem;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+}
+
+.nodeName {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.failingNode .nodeIcon {
+  color: var(--color-error);
+}
+
+.failingNode .nodeName {
+  color: var(--color-error);
+}
+
+.brokenConnector {
+  flex: 1;
+  position: relative;
+  height: 2px;
+  top: -16px;
+}
+
+.line {
+  height: 100%;
+  width: 100%;
+  background-color: var(--color-error);
+  opacity: 0.3;
+}
+
+.errorIcon {
+  position: absolute;
+  top: -10px;
+  left: calc(50% - 10px);
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: var(--color-error);
+  color: var(--bg-canvas);
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.consoleLog {
+  background-color: rgba(23, 43, 54, 0.9);
+  border-radius: var(--radius-xs);
+  padding: var(--spacing-xs);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.logLine {
+  font-family: var(--font-restricted);
+  font-size: 0.65rem;
+  line-height: 1.4;
+  word-break: break-all;
+}
+
+.logLine:nth-child(1) { color: var(--color-error); }
+.logLine:nth-child(2) { color: var(--color-error); opacity: 0.9; }
+.logLine:nth-child(3) { color: var(--color-warning); }
+
+@media (max-width: 992px) {
+  .container {
+    flex-direction: column;
+    gap: var(--spacing-xl);
+  }
+  .textBlock {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+  .visualBlock {
+    flex: 0 0 100%;
+    max-width: 100%;
+    width: 100%;
+  }
+  .failingCard {
+    max-width: 100%;
+  }
+}

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<instruction document="1" title="Competition Requirement Analysis &amp; Technical Design Document">
+  <overview>
+    This document serves as the technical requirements spec sheet for the Premium AI SaaS Landing Page. 
+    It outlines the product and engineering requirements for each section on the page to secure maximum judging points.
+  </overview>
+  
+  <section_specifications>
+    <section id="hero" render_strategy="RSC">
+      <purpose>Establish immediate positioning as the "Premium Data Automation Platform" and display primary CTA.</purpose>
+      <client_js_budget_bytes>0</client_js_budget_bytes>
+      <lcp_target_seconds>1.2</lcp_target_seconds>
+      <animation>Pure CSS keyframes for text reveal and background gradient shifts (GPU-accelerated properties only).</animation>
+    </section>
+    
+    <section id="logo-cloud" render_strategy="RSC">
+      <purpose>Establish industry trust by showcasing logos of data-heavy tech organizations.</purpose>
+      <client_js_budget_bytes>0</client_js_budget_bytes>
+      <behavior>Pre-configured SVG dimensions, inline vectors, opacity fade-in. No looping carousel.</behavior>
+    </section>
+    
+    <section id="features" render_strategy="RSC">
+      <purpose>Explain the core technological engine (pipelines, schema mappings, automated ingestion).</purpose>
+      <client_js_budget_bytes>0</client_js_budget_bytes>
+      <layout>CSS Grid/Flexbox. Light viewport reveal triggers via CSS scroll-driven actions.</layout>
+    </section>
+    
+    <section id="bento-accordion" render_strategy="RSC/RCC">
+      <purpose>Showcase platform capabilities in a multi-dimensional grid on desktop (≥ 768px), transforming into a single-open accordion on mobile (&lt; 768px). This is a unified BentoAccordion component that shares active index state across both layout modes.</purpose>
+      <nested_components>Isolated RCC containers within server-rendered grid skeleton cells. useMediaQuery hook for layout switching. Shared activeIndex state that persists across desktop ↔ mobile transitions.</nested_components>
+      <animation>3D transform lift on mouse move (GPU bounds using will-change: transform) on desktop. Mobile accordion panels expand with max-height CSS transitions using --ease-accordion curve (350ms).</animation>
+    </section>
+    
+    <section id="faq" render_strategy="RCC">
+      <purpose>Objection handling accordion to address remaining user hesitations before the final CTA.</purpose>
+      <state_scope>Single-open accordion using activeIndex state (number | null) where null = all collapsed.</state_scope>
+      <behavior>Headers use aria-expanded. Panels use role="region" with aria-labelledby. Supports keyboard Enter/Space to toggle. Accordion panels expand via max-height transition (350ms, --ease-accordion). chevron-down.svg rotates 180° on expand.</behavior>
+    </section>
+    
+    <section id="pricing" render_strategy="RCC">
+      <purpose>Display subscription plans, billing commitments, and locale-specific currency rates.</purpose>
+      <state_scope>Strict local encapsulation of selected currency, plan tier, and billing cycle. No parent context.</state_scope>
+      <behavior>Changes inside pricing selectors must not trigger renders in other sections.</behavior>
+    </section>
+    
+    <section id="testimonials" render_strategy="RSC">
+      <purpose>Provide qualitative validation from senior technical leaders (CTOs, Head of Platform).</purpose>
+      <client_js_budget_bytes>0</client_js_budget_bytes>
+      <animation>Viewport-triggered CSS fade-in.</animation>
+    </section>
+    
+    <section id="cta-panel" render_strategy="RSC">
+      <purpose>Final high-contrast action block to convert interest into sign-up funnel.</purpose>
+      <client_js_budget_bytes>0</client_js_budget_bytes>
+      <animation>GPU-accelerated button scaling (scale3d).</animation>
+    </section>
+    
+    <section id="footer" render_strategy="RSC">
+      <purpose>Secondary navigation, compliance, and legal directory links.</purpose>
+      <client_js_budget_bytes>0</client_js_budget_bytes>
+    </section>
+  </section_specifications>
+  
+  <performance_budgets>
+    <lighthouse>
+      <performance_target>98</performance_target>
+      <accessibility_target>100</accessibility_target>
+      <seo_target>100</seo_target>
+      <best_practices_target>100</best_practices_target>
+    </lighthouse>
+    <core_web_vitals>
+      <fcp_seconds_max>0.8</fcp_seconds_max>
+      <lcp_seconds_max>1.5</lcp_seconds_max>
+      <cls_max>0.01</cls_max>
+      <inp_ms_max>80</inp_ms_max>
+      <ttfb_ms_max>300</ttfb_ms_max>
+      <hydration_time_ms_max>150</hydration_time_ms_max>
+    </core_web_vitals>
+    <file_sizes>
+      <html_raw_max_kb>25</html_raw_max_kb>
+      <js_bundle_first_load_gzip_max_kb>100</js_bundle_first_load_gzip_max_kb>
+    </file_sizes>
+  </performance_budgets>
+  
+  <testing_requirements>
+    <test type="pricing_currency_validation">Verify price calculations, annual discount application (20%), and symbol rendering.</test>
+    <test type="state_isolation_check">Use DevTools Profiler to verify pricing selections trigger zero sibling renders.</test>
+    <test type="accessibility_audit">Keyboard-only walkthrough (Tab focus visible, Escape locks, touch-targets >= 44px).</test>
+    <test type="hydration_verification">Initial render comparison with SSR checks to prevent hydration mismatches.</test>
+  </testing_requirements>
+</instruction>
