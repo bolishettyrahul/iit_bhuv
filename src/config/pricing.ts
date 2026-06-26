@@ -29,7 +29,7 @@ export const pricingConfig = {
     {
       id: 'pro',
       name: 'Pro',
-      basePriceUSD: 99,
+      basePriceUSD: 50,
       features: [
         'Unlimited automated pipelines',
         'Realtime schema synchronization',
@@ -42,7 +42,7 @@ export const pricingConfig = {
     {
       id: 'enterprise',
       name: 'Enterprise',
-      basePriceUSD: 299,
+      basePriceUSD: 250,
       features: [
         'Dedicated processing engine',
         'Custom service level agreements (SLAs)',
@@ -56,8 +56,8 @@ export const pricingConfig = {
   
   currencies: [
     { code: 'USD', symbol: '$', multiplier: 1.0, locale: 'en-US' },
-    { code: 'INR', symbol: '₹', multiplier: 0.6, locale: 'en-IN' }, // PPP adjusted multiplier
-    { code: 'EUR', symbol: '€', multiplier: 0.9, locale: 'de-DE' }
+    { code: 'INR', symbol: '₹', multiplier: 83.0, locale: 'en-IN' }, // Actual exchange rate multiplier
+    { code: 'EUR', symbol: '€', multiplier: 0.92, locale: 'de-DE' } // Actual exchange rate multiplier
   ] as CurrencyConfig[],
   
   annualDiscount: 0.20 // 20% discount

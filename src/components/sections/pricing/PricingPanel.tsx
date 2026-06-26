@@ -22,7 +22,7 @@ export const PricingPanel: React.FC = () => {
           </div>
           <h2 id="pricing-title" className={styles.title}>Flexible, value-aligned plans</h2>
           <p className={styles.description}>
-            PPP-adjusted rates for regional currencies with a 20% commitment discount for annual billing.
+            Regional exchange rates with a 20% commitment discount for annual billing.
           </p>
         </div>
 
