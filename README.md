@@ -1,36 +1,78 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# DataFlow — Premium Data Ingestion & Pipeline Automation
 
-## Getting Started
+DataFlow is a high-performance, premium SaaS landing page designed to showcase a modern ETL pipeline automation product. Connect database sources, map schemas, and monitor automated pipelines without writing custom glue code. Built using **Next.js**, **React**, and **Vanilla CSS Modules** for clean design, responsive structure, and bespoke animations.
 
-First, run the development server:
+---
 
+## 🚀 Key Features & Enhancements
+
+### 1. Interactive Integrations Sandbox (Playground)
+- **Live Terminal Console**: Simulated real-time logging terminal displaying database blocks, schema alignment check, metadata readings, and latency statistics.
+- **Dynamic Selection Nodes**: Interactive source nodes (**PostgreSQL**, **AWS S3**) and destination target nodes (**Snowflake**, **BigQuery**, **Docker**) that update states instantly.
+- **SVG Animated Beams**: Selected integrations dynamically light up connection pathways using SVG paths with flowing neon dash-array animations.
+- **Metrics Dashboard**: Simulated real-time count-ups for rows synced, live latency calculations, and data rate estimations.
+
+### 2. Animated Solution Stepper
+- An auto-advancing 4-step progress timeline displaying pipeline stages.
+- Each active step features a smooth progress bar overlay filling up in real-time.
+- Connected lines trace the progress using an animated glowing signal packet.
+
+### 3. Sleek Glassmorphic Design System
+- **Compact Navbar**: Highly optimized 48px navbar built with responsive layout support, high-saturation blur backdrop filter (`blur(24px) saturate(220%)`), and translucent outlines.
+- **Translucent Neumorphic Cards**: Standardized card components implementing glassmorphic backings, dual-shadow glows (light top-left highlight and deep bottom-right offset shadow), and glossy borders.
+- **Animated Background Mesh**: A vibrant CSS radial-gradient mesh overlay utilizing custom theme colors (Mystic Mint, Deep Saffron, Forsythia, and Nocturnal Expedition) with floating blur animations.
+
+### 4. Scroll-Triggered Drawing Borders
+- Replaces static section dividers with dynamic borders that automatically expand outward from the center when a section enters the viewport.
+
+---
+
+## 🛠️ Technology Stack
+
+- **Framework**: Next.js 15+ (App Router, Turbopack)
+- **Core Library**: React 19
+- **Styling**: Vanilla CSS Modules (custom variables & design tokens)
+- **Typing**: TypeScript
+- **Icons**: Lucide-inspired SVG custom components
+
+---
+
+## ⚙️ Getting Started
+
+### Prerequisites
+
+Ensure you have **Node.js** (v18.x or later) installed.
+
+### Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/bolishettyrahul/iit_bhuv.git
+   cd iit_bhuv
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+### Running Locally
+
+To run the Next.js development server:
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser to view the interactive application.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Build and Optimization
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+To build the application for production:
+```bash
+npm run build
+```
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+To run the production build locally:
+```bash
+npm run start
+```
