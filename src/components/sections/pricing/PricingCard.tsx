@@ -19,7 +19,7 @@ export const PricingCard: React.FC<PricingCardProps> = ({
   billingCycle,
   activeCurrency
 }) => {
-  const priceDetails = usePricingMatrix(tier.basePriceUSD, activeCurrency, billingCycle);
+  const priceDetails = usePricingMatrix(tier.prices, activeCurrency, billingCycle);
   const formattedPrice = formatCurrency(priceDetails.displayPriceCents, activeCurrency);
   const isPro = tier.id === 'pro';
   

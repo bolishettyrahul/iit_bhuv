@@ -9,17 +9,17 @@ export interface CalculatedPrice {
 }
 
 export function calculatePrice(
-  basePriceUSD: number,
+  prices: { [currencyCode: string]: number },
   currencyCode: string,
   billingCycle: 'monthly' | 'annual'
 ): CalculatedPrice {
   const currency = pricingConfig.currencies.find(c => c.code === currencyCode) || pricingConfig.currencies[0];
-  const multiplier = currency.multiplier;
+  const priceVal = prices[currencyCode] !== undefined ? prices[currencyCode] : (prices['USD'] || 0);
   
   // Calculate base monthly price in cents
-  const baseMonthlyCents = basePriceUSD * 100;
+  const baseMonthlyCents = priceVal * 100;
   
-  if (basePriceUSD === 0) {
+  if (priceVal === 0) {
     return {
       totalCents: 0,
       displayPriceCents: 0,
@@ -30,10 +30,9 @@ export function calculatePrice(
   }
   
   if (billingCycle === 'monthly') {
-    const totalCents = Math.round(baseMonthlyCents * multiplier);
     return {
-      totalCents,
-      displayPriceCents: totalCents,
+      totalCents: baseMonthlyCents,
+      displayPriceCents: baseMonthlyCents,
       currencySymbol: currency.symbol,
       perUnitLabel: '/mo',
       billingFrequencyLabel: 'billed monthly'
@@ -44,10 +43,10 @@ export function calculatePrice(
     const discountedMonthlyCents = baseMonthlyCents * discountFactor;
     
     // Annual total in cents
-    const totalCents = Math.round(discountedMonthlyCents * 12 * multiplier);
+    const totalCents = Math.round(discountedMonthlyCents * 12);
     
     // Monthly equivalent in cents
-    const displayPriceCents = Math.round(discountedMonthlyCents * multiplier);
+    const displayPriceCents = Math.round(discountedMonthlyCents);
     
     return {
       totalCents,
@@ -56,15 +55,5 @@ export function calculatePrice(
       perUnitLabel: '/mo',
       billingFrequencyLabel: `billed annually (${currency.symbol}${Math.round(totalCents / 100)}/yr)`
     };
-  }
-}
-export interface ExchangeRateProvider {
-  getRate(targetCurrency: string): Promise<number> | number;
-}
-
-export class StaticExchangeRateProvider implements ExchangeRateProvider {
-  getRate(targetCurrency: string): number {
-    const currency = pricingConfig.currencies.find(c => c.code === targetCurrency);
-    return currency ? currency.multiplier : 1.0;
   }
 }

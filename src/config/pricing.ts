@@ -1,14 +1,15 @@
 export interface PricingTier {
   id: string;
   name: string;
-  basePriceUSD: number;
+  prices: {
+    [currencyCode: string]: number;
+  };
   features: string[];
 }
 
 export interface CurrencyConfig {
   code: string;
   symbol: string;
-  multiplier: number;
   locale: string;
 }
 
@@ -17,7 +18,11 @@ export const pricingConfig = {
     {
       id: 'starter',
       name: 'Starter',
-      basePriceUSD: 0,
+      prices: {
+        USD: 0,
+        INR: 0,
+        EUR: 0
+      },
       features: [
         '5 automated pipelines',
         'Hourly schema synchronization',
@@ -29,7 +34,11 @@ export const pricingConfig = {
     {
       id: 'pro',
       name: 'Pro',
-      basePriceUSD: 50,
+      prices: {
+        USD: 79,
+        INR: 50,
+        EUR: 69
+      },
       features: [
         'Unlimited automated pipelines',
         'Realtime schema synchronization',
@@ -42,7 +51,11 @@ export const pricingConfig = {
     {
       id: 'enterprise',
       name: 'Enterprise',
-      basePriceUSD: 250,
+      prices: {
+        USD: 250,
+        INR: 150,
+        EUR: 229
+      },
       features: [
         'Dedicated processing engine',
         'Custom service level agreements (SLAs)',
@@ -55,9 +68,9 @@ export const pricingConfig = {
   ] as PricingTier[],
   
   currencies: [
-    { code: 'USD', symbol: '$', multiplier: 1.0, locale: 'en-US' },
-    { code: 'INR', symbol: '₹', multiplier: 83.0, locale: 'en-IN' }, // Actual exchange rate multiplier
-    { code: 'EUR', symbol: '€', multiplier: 0.92, locale: 'de-DE' } // Actual exchange rate multiplier
+    { code: 'USD', symbol: '$', locale: 'en-US' },
+    { code: 'INR', symbol: '₹', locale: 'en-IN' },
+    { code: 'EUR', symbol: '€', locale: 'de-DE' }
   ] as CurrencyConfig[],
   
   annualDiscount: 0.20 // 20% discount
