@@ -28,7 +28,7 @@ export const WorksWith: React.FC = () => {
   const [metricLatency, setMetricLatency] = useState<number>(24);
   const [metricRate, setMetricRate] = useState<number>(45.2);
   
-  const consoleEndRef = useRef<HTMLDivElement>(null);
+  const consoleBodyRef = useRef<HTMLDivElement>(null);
 
   const getSourceDisplayName = (src: string) => {
     return src === 'postgresql' ? 'PostgreSQL' : 'AWS S3';
@@ -110,8 +110,8 @@ export const WorksWith: React.FC = () => {
 
   // Scroll console to bottom
   useEffect(() => {
-    if (consoleEndRef.current) {
-      consoleEndRef.current.scrollIntoView({ behavior: 'smooth' });
+    if (consoleBodyRef.current) {
+      consoleBodyRef.current.scrollTop = consoleBodyRef.current.scrollHeight;
     }
   }, [logs]);
 
@@ -246,7 +246,7 @@ export const WorksWith: React.FC = () => {
                 <span className={styles.consoleTitle}>DataFlow Live Sync Console</span>
                 <span className={styles.statusPulse}>{syncing ? 'RUNNING' : 'IDLE'}</span>
               </div>
-              <div className={styles.consoleBody}>
+              <div ref={consoleBodyRef} className={styles.consoleBody}>
                 {logs.map((log, idx) => (
                   <div key={idx} className={`${styles.consoleLogLine} ${styles[log.type]}`}>
                     <span className={styles.logTime}>[{log.time}]</span>
@@ -258,7 +258,6 @@ export const WorksWith: React.FC = () => {
                     <span className={styles.consoleBlinker}>_</span>
                   </div>
                 )}
-                <div ref={consoleEndRef} />
               </div>
             </div>
 
