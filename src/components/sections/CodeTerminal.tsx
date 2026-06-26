@@ -35,7 +35,7 @@ export const CodeTerminal: React.FC<CodeTerminalProps> = ({ cliCommand, codePrev
             <span className={`${styles.headerDot} ${styles.dotGreen}`} />
           </div>
           <span className={styles.terminalTitle}>bash</span>
-          <button className={styles.copyBtn} onClick={copyCli} aria-label="Copy CLI Command">
+          <button type="button" className={styles.copyBtn} onClick={copyCli} aria-label="Copy CLI Command">
             {copiedCli ? 'Copied!' : 'Copy'}
           </button>
         </div>
@@ -54,7 +54,7 @@ export const CodeTerminal: React.FC<CodeTerminalProps> = ({ cliCommand, codePrev
             <span className={`${styles.headerDot} ${styles.dotGreen}`} />
           </div>
           <span className={styles.terminalTitle}>pipeline.yaml</span>
-          <button className={styles.copyBtn} onClick={copyYaml} aria-label="Copy Configuration YAML">
+          <button type="button" className={styles.copyBtn} onClick={copyYaml} aria-label="Copy Configuration YAML">
             {copiedYaml ? 'Copied!' : 'Copy'}
           </button>
         </div>

@@ -139,7 +139,8 @@ export const WorksWith: React.FC = () => {
           <div className={styles.columnPanel}>
             <h3 className={styles.panelTitle}>Choose Source</h3>
             <div className={styles.nodeList}>
-              <button 
+              <button
+                type="button"
                 onClick={() => setSource('postgresql')}
                 className={`${styles.selectButton} ${source === 'postgresql' ? styles.btnActiveSource : ''}`}
                 aria-pressed={source === 'postgresql'}
@@ -155,7 +156,8 @@ export const WorksWith: React.FC = () => {
                 </Card>
               </button>
 
-              <button 
+              <button
+                type="button"
                 onClick={() => setSource('aws-s3')}
                 className={`${styles.selectButton} ${source === 'aws-s3' ? styles.btnActiveSource : ''}`}
                 aria-pressed={source === 'aws-s3'}
@@ -266,7 +268,8 @@ export const WorksWith: React.FC = () => {
           <div className={styles.columnPanel}>
             <h3 className={styles.panelTitle}>Choose Target</h3>
             <div className={styles.nodeList}>
-              <button 
+              <button
+                type="button"
                 onClick={() => setDestination('snowflake')}
                 className={`${styles.selectButton} ${destination === 'snowflake' ? styles.btnActiveDest : ''}`}
                 aria-pressed={destination === 'snowflake'}
@@ -282,7 +285,8 @@ export const WorksWith: React.FC = () => {
                 </Card>
               </button>
 
-              <button 
+              <button
+                type="button"
                 onClick={() => setDestination('bigquery')}
                 className={`${styles.selectButton} ${destination === 'bigquery' ? styles.btnActiveDest : ''}`}
                 aria-pressed={destination === 'bigquery'}
@@ -298,7 +302,8 @@ export const WorksWith: React.FC = () => {
                 </Card>
               </button>
 
-              <button 
+              <button
+                type="button"
                 onClick={() => setDestination('docker')}
                 className={`${styles.selectButton} ${destination === 'docker' ? styles.btnActiveDest : ''}`}
                 aria-pressed={destination === 'docker'}
